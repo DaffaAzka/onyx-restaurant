@@ -20,4 +20,25 @@ class RestaurantsProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> searchRestaurants(String search) async {
+    _state = ApiLoading();
+    notifyListeners();
+
+    try {
+      final response = await ApiService().searchRestaurantListing(search);
+      _state = ApiSuccess(
+        ListRestaurantResponse(
+          error: false,
+          message: response.founded.toString(),
+          restaurants: response.restaurants,
+          count: response.restaurants.length,
+        ),
+      );
+    } catch (e) {
+      _state = ApiError(e.toString());
+    }
+
+    notifyListeners();
+  }
 }

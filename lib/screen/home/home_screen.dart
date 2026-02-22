@@ -13,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -24,17 +26,31 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<RestaurantsProvider>().getState;
-    return switch (state) {
-      ApiInitial() || ApiLoading() => const Center(child: CircularProgressIndicator()),
+    return Column(
+      children: [
+        TextField(
+          controller: _searchController,
+          decoration: const InputDecoration(labelText: "Search"),
+          onEditingComplete: () {
+            Provider.of<RestaurantsProvider>(context, listen: false).searchRestaurants(_searchController.text);
+          },
+        ),
 
-      ApiSuccess(data: final data) => ListView.builder(
-        itemCount: data.count,
-        itemBuilder: (context, index) {
-          return RestaurantCard(item: data.restaurants[index]);
-        },
-      ),
+        Expanded(
+          child: switch (state) {
+            ApiInitial() || ApiLoading() => const Center(child: CircularProgressIndicator()),
 
-      ApiError<ListRestaurantResponse>() => ErrorWidget(state.message),
-    };
+            ApiSuccess(data: final data) => ListView.builder(
+              itemCount: data.count,
+              itemBuilder: (context, index) {
+                return RestaurantCard(item: data.restaurants[index]);
+              },
+            ),
+
+            ApiError<ListRestaurantResponse>() => ErrorWidget(state.message),
+          },
+        ),
+      ],
+    );
   }
 }

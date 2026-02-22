@@ -27,7 +27,34 @@ class RestaurantCard extends StatelessWidget {
                 ),
               ),
             ),
-            Text(item.name, style: TextStyle(fontSize: 10)),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 2,
+                children: [
+                  Text(item.name, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 2,
+                    children: [
+                      Icon(Icons.location_city, size: 18),
+                      Text(item.city, style: TextStyle(fontSize: 14)),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 2,
+                    children: [
+                      Icon(Icons.star, color: Colors.amberAccent, size: 18),
+                      Text(item.rating.toString(), style: TextStyle(fontSize: 14)),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
