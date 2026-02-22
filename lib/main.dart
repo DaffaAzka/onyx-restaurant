@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/provider/navigation_provider.dart';
+import 'package:onyx_restaurant/provider/restaurant_provider.dart';
 import 'package:onyx_restaurant/provider/theme_provider.dart';
 import 'package:onyx_restaurant/main_screen.dart';
+import 'package:onyx_restaurant/screen/detail/detail_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,9 +27,15 @@ class MyApp extends StatelessWidget {
         darkTheme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark),
         ),
-        themeMode: mode ,
+        themeMode: mode,
         initialRoute: '/',
-        routes: {'/': (context) => MainScreen()},
+        routes: {
+          '/': (context) => MainScreen(),
+          '/detail': (context) => ChangeNotifierProvider(
+            create: (_) => RestaurantProvider(),
+            child: DetailScreen(id: ModalRoute.of(context)?.settings.arguments as String),
+          ),
+        },
       ),
     );
   }

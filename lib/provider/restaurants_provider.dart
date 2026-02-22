@@ -15,7 +15,7 @@ class RestaurantsProvider extends ChangeNotifier {
       final response = await ApiService().getRestaurantListing();
       _state = ApiSuccess(response);
     } catch (e) {
-      _state = ApiError(e.toString());
+      _state = ApiError("Something wrong while call the API");
     }
 
     notifyListeners();

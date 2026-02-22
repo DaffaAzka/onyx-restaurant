@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/core/api_state.dart';
-import 'package:onyx_restaurant/data/models/responses/list_restaurant_response.dart';
 import 'package:onyx_restaurant/provider/restaurants_provider.dart';
+import 'package:onyx_restaurant/widgets/error_widget.dart';
 import 'package:onyx_restaurant/widgets/restaurant_card.dart';
 import 'package:provider/provider.dart';
 
@@ -28,12 +28,31 @@ class _HomeScreenState extends State<HomeScreen> {
     final state = context.watch<RestaurantsProvider>().getState;
     return Column(
       children: [
-        TextField(
-          controller: _searchController,
-          decoration: const InputDecoration(labelText: "Search"),
-          onEditingComplete: () {
-            Provider.of<RestaurantsProvider>(context, listen: false).searchRestaurants(_searchController.text);
-          },
+        Padding(
+          padding: EdgeInsetsGeometry.all(12),
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              hintText: "Search restaurants...",
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: _searchController.text.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        _searchController.clear();
+                        Provider.of<RestaurantsProvider>(context, listen: false).searchRestaurants('');
+                      },
+                    )
+                  : null,
+              filled: true,
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            ),
+            onEditingComplete: () {
+              Provider.of<RestaurantsProvider>(context, listen: false).searchRestaurants(_searchController.text);
+            },
+            onChanged: (_) => setState(() {}),
+          ),
         ),
 
         Expanded(
@@ -47,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
 
-            ApiError<ListRestaurantResponse>() => ErrorWidget(state.message),
+            ApiError(message: final message) => CustomErrorWidget(error: message),
           },
         ),
       ],

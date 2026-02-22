@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:onyx_restaurant/data/models/responses/detail_restaurant_response.dart';
 import 'package:onyx_restaurant/data/models/responses/list_restaurant_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:onyx_restaurant/data/models/responses/search_restaurant_response.dart';
@@ -20,6 +21,16 @@ class ApiService {
     final response = await http.get(Uri.parse("$_baseUrl/search?q=$search"));
     if (response.statusCode == 200) {
       return SearchRestaurantResponse.fromMap(jsonDecode(response.body));
+    } else {
+      throw Exception("Something wrong while call the API");
+    }
+  }
+
+  Future<DetailRestaurantResponse> getRestaurantDetail(String id) async {
+    final response = await http.get(Uri.parse("$_baseUrl/detail/$id"));
+
+    if (response.statusCode == 200) {
+      return DetailRestaurantResponse.fromMap(jsonDecode(response.body));
     } else {
       throw Exception("Something wrong while call the API");
     }

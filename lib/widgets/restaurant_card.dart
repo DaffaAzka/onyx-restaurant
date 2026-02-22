@@ -9,7 +9,9 @@ class RestaurantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, '/detail', arguments: item.id);
+      },
       child: Padding(
         padding: EdgeInsetsGeometry.all(8),
         child: Row(
