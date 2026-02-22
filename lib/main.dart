@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/provider/navigation_provider.dart';
 import 'package:onyx_restaurant/provider/theme_provider.dart';
-import 'package:onyx_restaurant/screen/main_screen.dart';
+import 'package:onyx_restaurant/main_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {

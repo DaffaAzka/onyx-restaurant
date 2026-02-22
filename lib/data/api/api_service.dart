@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:onyx_restaurant/data/model/responses/list_restaurant_response.dart';
+import 'package:onyx_restaurant/data/models/responses/list_restaurant_response.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {

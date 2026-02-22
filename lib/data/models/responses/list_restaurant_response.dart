@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 
-import 'package:onyx_restaurant/data/model/restaurant_list_item.dart';
+import 'package:onyx_restaurant/data/models/restaurant_list_item.dart';
 
 class ListRestaurantResponse {
   final bool error;
