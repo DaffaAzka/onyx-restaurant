@@ -3,6 +3,7 @@ import 'package:onyx_restaurant/core/api_state.dart';
 import 'package:onyx_restaurant/provider/restaurants_provider.dart';
 import 'package:onyx_restaurant/widgets/error_widget.dart';
 import 'package:onyx_restaurant/widgets/restaurant_card.dart';
+import 'package:onyx_restaurant/style/typography/onyx_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {

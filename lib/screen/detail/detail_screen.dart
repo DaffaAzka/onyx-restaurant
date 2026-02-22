@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/core/api_state.dart';
 import 'package:onyx_restaurant/provider/restaurant_provider.dart';
 import 'package:onyx_restaurant/widgets/error_widget.dart';
+import 'package:onyx_restaurant/style/colors/onyx_colors.dart';
+import 'package:onyx_restaurant/style/typography/onyx_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -62,7 +64,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(data.restaurant.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(data.restaurant.name, style: OnyxTextStyles.headlineLarge),
                           const SizedBox(height: 4),
                           Row(
                             children: [
@@ -71,7 +73,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               Expanded(
                                 child: Text(
                                   "${data.restaurant.address}, ${data.restaurant.city}",
-                                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                                  style: OnyxTextStyles.labelSmall,
                                 ),
                               ),
                             ],
@@ -82,9 +84,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     const SizedBox(width: 8),
                     Row(
                       children: [
-                        const Icon(Icons.star, color: Colors.amber, size: 18),
+                        Icon(Icons.star, color: AppColors.primary, size: 18),
                         const SizedBox(width: 4),
-                        Text(data.restaurant.rating.toString(), style: const TextStyle(fontWeight: FontWeight.w600)),
+                        Text(data.restaurant.rating.toString(), style: OnyxTextStyles.labelLarge),
                       ],
                     ),
                   ],
@@ -95,7 +97,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   spacing: 6,
                   children: data.restaurant.categories.map((category) {
                     return Chip(
-                      label: Text(category.name, style: const TextStyle(fontSize: 11)),
+                      label: Text(category.name, style: OnyxTextStyles.labelSmall),
                       visualDensity: VisualDensity.compact,
                       padding: EdgeInsets.zero,
                     );
@@ -103,10 +105,10 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                Text(data.restaurant.description, style: const TextStyle(fontSize: 14, height: 1.5)),
+                Text(data.restaurant.description, style: OnyxTextStyles.labelLarge),
                 const SizedBox(height: 20),
 
-                const Text("Foods", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text("Foods", style: OnyxTextStyles.titleMedium),
                 const SizedBox(height: 8),
                 GridView.count(
                   crossAxisCount: 2,
@@ -127,11 +129,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           const Icon(Icons.restaurant, size: 14, color: Colors.orange),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(
-                              food.name,
-                              style: const TextStyle(fontSize: 12),
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                            child: Text(food.name, style: OnyxTextStyles.labelSmall, overflow: TextOverflow.ellipsis),
                           ),
                         ],
                       ),
@@ -140,7 +138,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                const Text("Drinks", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text("Drinks", style: OnyxTextStyles.titleMedium),
                 const SizedBox(height: 8),
                 GridView.count(
                   crossAxisCount: 2,
@@ -161,11 +159,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           const Icon(Icons.local_drink, size: 14, color: Colors.blue),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(
-                              drink.name,
-                              style: const TextStyle(fontSize: 12),
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                            child: Text(drink.name, style: OnyxTextStyles.labelSmall, overflow: TextOverflow.ellipsis),
                           ),
                         ],
                       ),
@@ -174,7 +168,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                const Text("Reviews", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text("Reviews", style: OnyxTextStyles.titleMedium),
                 const SizedBox(height: 8),
                 ...data.restaurant.customerReviews.map((review) {
                   return Padding(
@@ -186,13 +180,13 @@ class _DetailScreenState extends State<DetailScreen> {
                           children: [
                             const Icon(Icons.person, size: 16, color: Colors.grey),
                             const SizedBox(width: 4),
-                            Text(review.name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
+                            Text(review.name, style: OnyxTextStyles.titleSmall),
                             const Spacer(),
-                            Text(review.date, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+                            Text(review.date, style: OnyxTextStyles.labelSmall),
                           ],
                         ),
                         const SizedBox(height: 4),
-                        Text(review.review, style: const TextStyle(fontSize: 13)),
+                        Text(review.review, style: OnyxTextStyles.labelLarge),
                         const Divider(),
                       ],
                     ),

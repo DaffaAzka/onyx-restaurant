@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/style/colors/onyx_colors.dart';
 import 'package:onyx_restaurant/style/typography/onyx_text_styles.dart';
 
-class TourismTheme {
+class OnyxTheme {
   static ThemeData get lightTheme {
     return ThemeData(
-      colorSchemeSeed: OnyxColors.blue.color,
+      colorSchemeSeed: OnyxColors.purple.color,
       brightness: Brightness.light,
       textTheme: _textTheme,
       useMaterial3: true,
@@ -15,7 +15,7 @@ class TourismTheme {
 
   static ThemeData get darkTheme {
     return ThemeData(
-      colorSchemeSeed: OnyxColors.blue.color,
+      colorSchemeSeed: OnyxColors.purple.color,
       brightness: Brightness.dark,
       textTheme: _textTheme,
       useMaterial3: true,

@@ -4,6 +4,7 @@ import 'package:onyx_restaurant/provider/restaurant_provider.dart';
 import 'package:onyx_restaurant/provider/theme_provider.dart';
 import 'package:onyx_restaurant/main_screen.dart';
 import 'package:onyx_restaurant/screen/detail/detail_screen.dart';
+import 'package:onyx_restaurant/style/theme/onyx_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -21,12 +22,8 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (_) => NavigationProvider())],
       child: MaterialApp(
         title: 'Onyx Restaurant',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.light),
-        ),
-        darkTheme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark),
-        ),
+        theme: OnyxTheme.lightTheme,
+        darkTheme: OnyxTheme.darkTheme,
         themeMode: mode,
         initialRoute: '/',
         routes: {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/data/models/restaurant_list_item.dart';
+import 'package:onyx_restaurant/style/colors/onyx_colors.dart';
+import 'package:onyx_restaurant/style/typography/onyx_text_styles.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({super.key, required this.item});
@@ -35,14 +37,14 @@ class RestaurantCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 2,
                 children: [
-                  Text(item.name, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                  Text(item.name, style: OnyxTextStyles.titleSmall),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     spacing: 2,
                     children: [
                       Icon(Icons.location_city, size: 18),
-                      Text(item.city, style: TextStyle(fontSize: 14)),
+                      Text(item.city, style: OnyxTextStyles.labelMedium),
                     ],
                   ),
                   Row(
@@ -50,8 +52,8 @@ class RestaurantCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     spacing: 2,
                     children: [
-                      Icon(Icons.star, color: Colors.amberAccent, size: 18),
-                      Text(item.rating.toString(), style: TextStyle(fontSize: 14)),
+                      Icon(Icons.star, color: AppColors.primary, size: 18),
+                      Text(item.rating.toString(), style: OnyxTextStyles.labelMedium),
                     ],
                   ),
                 ],
