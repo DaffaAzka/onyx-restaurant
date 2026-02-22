@@ -8,7 +8,9 @@ import 'package:onyx_restaurant/style/theme/onyx_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (_) => ThemeProvider(), child: MyApp()));
+  runApp(
+    ChangeNotifierProvider(create: (_) => ThemeProvider(), child: MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +32,9 @@ class MyApp extends StatelessWidget {
           '/': (context) => MainScreen(),
           '/detail': (context) => ChangeNotifierProvider(
             create: (_) => RestaurantProvider(),
-            child: DetailScreen(id: ModalRoute.of(context)?.settings.arguments as String),
+            child: DetailScreen(
+              id: ModalRoute.of(context)?.settings.arguments as String,
+            ),
           ),
         },
       ),

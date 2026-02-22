@@ -23,16 +23,23 @@ class Menus {
 
   factory Menus.fromMap(Map<String, dynamic> map) {
     return Menus(
-      foods: List<Food>.from((map['foods'] as List<dynamic>).map<Food>((x) => Food.fromMap(x as Map<String, dynamic>))),
+      foods: List<Food>.from(
+        (map['foods'] as List<dynamic>).map<Food>(
+          (x) => Food.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
       drinks: List<Drink>.from(
-        (map['drinks'] as List<dynamic>).map<Drink>((x) => Drink.fromMap(x as Map<String, dynamic>)),
+        (map['drinks'] as List<dynamic>).map<Drink>(
+          (x) => Drink.fromMap(x as Map<String, dynamic>),
+        ),
       ),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Menus.fromJson(String source) => Menus.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Menus.fromJson(String source) =>
+      Menus.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'Menus(foods: $foods, drinks: $drinks)';

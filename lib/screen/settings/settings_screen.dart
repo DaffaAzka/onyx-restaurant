@@ -8,7 +8,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = context.watch<ThemeProvider>().getThemeMode == ThemeMode.dark;
+    final isDarkMode =
+        context.watch<ThemeProvider>().getThemeMode == ThemeMode.dark;
 
     return Scaffold(
       body: Column(
@@ -24,7 +25,10 @@ class SettingsScreen extends StatelessWidget {
                 value: isDarkMode,
                 onChanged: (value) {
                   ThemeMode theme = value ? ThemeMode.dark : ThemeMode.light;
-                  Provider.of<ThemeProvider>(context, listen: false).setThemeMode(theme);
+                  Provider.of<ThemeProvider>(
+                    context,
+                    listen: false,
+                  ).setThemeMode(theme);
                 },
               ),
             ],

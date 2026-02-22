@@ -18,7 +18,8 @@ class Food {
 
   String toJson() => json.encode(toMap());
 
-  factory Food.fromJson(String source) => Food.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Food.fromJson(String source) =>
+      Food.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'Food(name: $name)';

@@ -9,9 +9,17 @@ class SearchRestaurantResponse {
   final bool error;
   final int founded;
   final List<RestaurantListItem> restaurants;
-  SearchRestaurantResponse({required this.error, required this.founded, required this.restaurants});
+  SearchRestaurantResponse({
+    required this.error,
+    required this.founded,
+    required this.restaurants,
+  });
 
-  SearchRestaurantResponse copyWith({bool? error, int? founded, List<RestaurantListItem>? restaurants}) {
+  SearchRestaurantResponse copyWith({
+    bool? error,
+    int? founded,
+    List<RestaurantListItem>? restaurants,
+  }) {
     return SearchRestaurantResponse(
       error: error ?? this.error,
       founded: founded ?? this.founded,
@@ -42,16 +50,21 @@ class SearchRestaurantResponse {
   String toJson() => json.encode(toMap());
 
   factory SearchRestaurantResponse.fromJson(String source) =>
-      SearchRestaurantResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+      SearchRestaurantResponse.fromMap(
+        json.decode(source) as Map<String, dynamic>,
+      );
 
   @override
-  String toString() => 'SearchRestaurantResponse(error: $error, founded: $founded, restaurants: $restaurants)';
+  String toString() =>
+      'SearchRestaurantResponse(error: $error, founded: $founded, restaurants: $restaurants)';
 
   @override
   bool operator ==(covariant SearchRestaurantResponse other) {
     if (identical(this, other)) return true;
 
-    return other.error == error && other.founded == founded && listEquals(other.restaurants, restaurants);
+    return other.error == error &&
+        other.founded == founded &&
+        listEquals(other.restaurants, restaurants);
   }
 
   @override

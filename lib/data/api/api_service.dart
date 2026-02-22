@@ -17,7 +17,9 @@ class ApiService {
     }
   }
 
-  Future<SearchRestaurantResponse> searchRestaurantListing(String search) async {
+  Future<SearchRestaurantResponse> searchRestaurantListing(
+    String search,
+  ) async {
     final response = await http.get(Uri.parse("$_baseUrl/search?q=$search"));
     if (response.statusCode == 200) {
       return SearchRestaurantResponse.fromMap(jsonDecode(response.body));

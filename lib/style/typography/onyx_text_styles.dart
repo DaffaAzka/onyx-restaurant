@@ -46,30 +46,42 @@ class OnyxTextStyles {
 
   static TextStyle titleLarge = GoogleFonts.poppins(
     fontSize: 22,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w700,
     height: 1.2,
     letterSpacing: 1.2,
   );
 
   static TextStyle titleMedium = GoogleFonts.poppins(
     fontSize: 16,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
     height: 1.2,
     letterSpacing: 1.2,
   );
 
   static TextStyle titleSmall = GoogleFonts.poppins(
     fontSize: 14,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w500,
     height: 1.2,
     letterSpacing: 1.2,
   );
 
-  static TextStyle bodyLargeBold = GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w400, height: 1.56);
+  static TextStyle bodyLargeBold = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    height: 1.56,
+  );
 
-  static TextStyle bodyLargeMedium = GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w300, height: 1.56);
+  static TextStyle bodyLargeMedium = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w300,
+    height: 1.56,
+  );
 
-  static TextStyle bodyLargeRegular = GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w200, height: 1.56);
+  static TextStyle bodyLargeRegular = GoogleFonts.poppins(
+    fontSize: 12,
+    fontWeight: FontWeight.w200,
+    height: 1.56,
+  );
 
   static TextStyle labelLarge = GoogleFonts.poppins(
     fontSize: 14,

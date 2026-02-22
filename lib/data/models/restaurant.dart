@@ -80,7 +80,9 @@ class Restaurant {
       address: map['address'] as String,
       pictureId: map['pictureId'] as String,
       categories: List<Category>.from(
-        (map['categories'] as List<dynamic>).map<Category>((x) => Category.fromMap(x as Map<String, dynamic>)),
+        (map['categories'] as List<dynamic>).map<Category>(
+          (x) => Category.fromMap(x as Map<String, dynamic>),
+        ),
       ),
       menus: Menus.fromMap(map['menus'] as Map<String, dynamic>),
       rating: (map['rating'] as num).toDouble(),
@@ -94,7 +96,8 @@ class Restaurant {
 
   String toJson() => json.encode(toMap());
 
-  factory Restaurant.fromJson(String source) => Restaurant.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Restaurant.fromJson(String source) =>
+      Restaurant.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {

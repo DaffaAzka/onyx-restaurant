@@ -36,25 +36,28 @@ class DetailRestaurantResponse {
     return DetailRestaurantResponse(
       error: map['error'] as bool,
       message: map['message'] as String,
-      restaurant: Restaurant.fromMap(map['restaurant'] as Map<String,dynamic>),
+      restaurant: Restaurant.fromMap(map['restaurant'] as Map<String, dynamic>),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory DetailRestaurantResponse.fromJson(String source) => DetailRestaurantResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory DetailRestaurantResponse.fromJson(String source) =>
+      DetailRestaurantResponse.fromMap(
+        json.decode(source) as Map<String, dynamic>,
+      );
 
   @override
-  String toString() => 'DetailRestaurantResponse(error: $error, message: $message, restaurant: $restaurant)';
+  String toString() =>
+      'DetailRestaurantResponse(error: $error, message: $message, restaurant: $restaurant)';
 
   @override
   bool operator ==(covariant DetailRestaurantResponse other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.error == error &&
-      other.message == message &&
-      other.restaurant == restaurant;
+
+    return other.error == error &&
+        other.message == message &&
+        other.restaurant == restaurant;
   }
 
   @override

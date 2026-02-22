@@ -79,6 +79,11 @@ class RestaurantListItem {
 
   @override
   int get hashCode {
-    return id.hashCode ^ name.hashCode ^ description.hashCode ^ pictureId.hashCode ^ city.hashCode ^ rating.hashCode;
+    return id.hashCode ^
+        name.hashCode ^
+        description.hashCode ^
+        pictureId.hashCode ^
+        city.hashCode ^
+        rating.hashCode;
   }
 }

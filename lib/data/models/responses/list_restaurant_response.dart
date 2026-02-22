@@ -9,9 +9,19 @@ class ListRestaurantResponse {
   final String message;
   final List<RestaurantListItem> restaurants;
   final int count;
-  ListRestaurantResponse({required this.error, required this.message, required this.restaurants, required this.count});
+  ListRestaurantResponse({
+    required this.error,
+    required this.message,
+    required this.restaurants,
+    required this.count,
+  });
 
-  ListRestaurantResponse copyWith({bool? error, String? message, List<RestaurantListItem>? restaurants, int? count}) {
+  ListRestaurantResponse copyWith({
+    bool? error,
+    String? message,
+    List<RestaurantListItem>? restaurants,
+    int? count,
+  }) {
     return ListRestaurantResponse(
       error: error ?? this.error,
       message: message ?? this.message,
@@ -45,7 +55,9 @@ class ListRestaurantResponse {
   String toJson() => json.encode(toMap());
 
   factory ListRestaurantResponse.fromJson(String source) =>
-      ListRestaurantResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+      ListRestaurantResponse.fromMap(
+        json.decode(source) as Map<String, dynamic>,
+      );
 
   @override
   String toString() {
@@ -65,6 +77,9 @@ class ListRestaurantResponse {
 
   @override
   int get hashCode {
-    return error.hashCode ^ message.hashCode ^ restaurants.hashCode ^ count.hashCode;
+    return error.hashCode ^
+        message.hashCode ^
+        restaurants.hashCode ^
+        count.hashCode;
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/core/api_state.dart';
 import 'package:onyx_restaurant/provider/restaurant_provider.dart';
 import 'package:onyx_restaurant/widgets/error_widget.dart';
-import 'package:onyx_restaurant/style/colors/onyx_colors.dart';
 import 'package:onyx_restaurant/style/typography/onyx_text_styles.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,10 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => Provider.of<RestaurantProvider>(context, listen: false).fetchRestaurant(widget.id),
+      (_) => Provider.of<RestaurantProvider>(
+        context,
+        listen: false,
+      ).fetchRestaurant(widget.id),
     );
   }
 
@@ -37,7 +39,8 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ),
       body: switch (state) {
-        ApiInitial() || ApiLoading() => const Center(child: CircularProgressIndicator()),
+        ApiInitial() ||
+        ApiLoading() => const Center(child: CircularProgressIndicator()),
 
         ApiSuccess(data: final data) => SingleChildScrollView(
           child: Padding(
@@ -64,16 +67,23 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(data.restaurant.name, style: OnyxTextStyles.headlineLarge),
+                          Text(
+                            data.restaurant.name,
+                            style: OnyxTextStyles.headlineLarge,
+                          ),
                           const SizedBox(height: 4),
                           Row(
                             children: [
-                              const Icon(Icons.location_on, size: 14, color: Colors.grey),
+                              const Icon(
+                                Icons.location_on,
+                                size: 14,
+                                color: Colors.grey,
+                              ),
                               const SizedBox(width: 2),
                               Expanded(
                                 child: Text(
                                   "${data.restaurant.address}, ${data.restaurant.city}",
-                                  style: OnyxTextStyles.labelSmall,
+                                  style: OnyxTextStyles.labelLarge,
                                 ),
                               ),
                             ],
@@ -84,9 +94,12 @@ class _DetailScreenState extends State<DetailScreen> {
                     const SizedBox(width: 8),
                     Row(
                       children: [
-                        Icon(Icons.star, color: AppColors.primary, size: 18),
+                        Icon(Icons.star, color: Colors.amber, size: 18),
                         const SizedBox(width: 4),
-                        Text(data.restaurant.rating.toString(), style: OnyxTextStyles.labelLarge),
+                        Text(
+                          data.restaurant.rating.toString(),
+                          style: OnyxTextStyles.labelLarge,
+                        ),
                       ],
                     ),
                   ],
@@ -97,7 +110,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   spacing: 6,
                   children: data.restaurant.categories.map((category) {
                     return Chip(
-                      label: Text(category.name, style: OnyxTextStyles.labelSmall),
+                      label: Text(
+                        category.name,
+                        style: OnyxTextStyles.labelMedium,
+                      ),
                       visualDensity: VisualDensity.compact,
                       padding: EdgeInsets.zero,
                     );
@@ -105,7 +121,10 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 const SizedBox(height: 12),
 
-                Text(data.restaurant.description, style: OnyxTextStyles.labelLarge),
+                Text(
+                  data.restaurant.description,
+                  style: OnyxTextStyles.labelLarge,
+                ),
                 const SizedBox(height: 20),
 
                 Text("Foods", style: OnyxTextStyles.titleMedium),
@@ -126,10 +145,18 @@ class _DetailScreenState extends State<DetailScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         children: [
-                          const Icon(Icons.restaurant, size: 14, color: Colors.orange),
+                          const Icon(
+                            Icons.restaurant,
+                            size: 14,
+                            color: Colors.orange,
+                          ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(food.name, style: OnyxTextStyles.labelSmall, overflow: TextOverflow.ellipsis),
+                            child: Text(
+                              food.name,
+                              style: OnyxTextStyles.titleSmall,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ],
                       ),
@@ -156,10 +183,18 @@ class _DetailScreenState extends State<DetailScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         children: [
-                          const Icon(Icons.local_drink, size: 14, color: Colors.blue),
+                          const Icon(
+                            Icons.local_drink,
+                            size: 14,
+                            color: Colors.blue,
+                          ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(drink.name, style: OnyxTextStyles.labelSmall, overflow: TextOverflow.ellipsis),
+                            child: Text(
+                              drink.name,
+                              style: OnyxTextStyles.titleSmall,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ],
                       ),
@@ -178,7 +213,11 @@ class _DetailScreenState extends State<DetailScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.person, size: 16, color: Colors.grey),
+                            const Icon(
+                              Icons.person,
+                              size: 16,
+                              color: Colors.grey,
+                            ),
                             const SizedBox(width: 4),
                             Text(review.name, style: OnyxTextStyles.titleSmall),
                             const Spacer(),

@@ -47,7 +47,10 @@ class OnyxTheme {
     return AppBarTheme(
       toolbarTextStyle: _textTheme.titleLarge,
       shape: const BeveledRectangleBorder(
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(14), bottomRight: Radius.circular(14)),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(14),
+          bottomRight: Radius.circular(14),
+        ),
       ),
     );
   }
