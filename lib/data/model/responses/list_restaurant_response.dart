@@ -2,29 +2,16 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 
-import 'package:onyx_restaurant/data/model/restaurant.dart';
+import 'package:onyx_restaurant/data/model/restaurant_list_item.dart';
 
 class ListRestaurantResponse {
   final bool error;
   final String message;
-  final List<Restaurant> restaurants;
+  final List<RestaurantListItem> restaurants;
   final int count;
-  ListRestaurantResponse({
-    required this.error,
-    required this.message,
-    required this.restaurants,
-    required this.count,
-  });
+  ListRestaurantResponse({required this.error, required this.message, required this.restaurants, required this.count});
 
-
-  
-
-  ListRestaurantResponse copyWith({
-    bool? error,
-    String? message,
-    List<Restaurant>? restaurants,
-    int? count,
-  }) {
+  ListRestaurantResponse copyWith({bool? error, String? message, List<RestaurantListItem>? restaurants, int? count}) {
     return ListRestaurantResponse(
       error: error ?? this.error,
       message: message ?? this.message,
@@ -46,14 +33,19 @@ class ListRestaurantResponse {
     return ListRestaurantResponse(
       error: map['error'] as bool,
       message: map['message'] as String,
-      restaurants: List<Restaurant>.from((map['restaurants'] as List<int>).map<Restaurant>((x) => Restaurant.fromMap(x as Map<String,dynamic>),),),
+      restaurants: List<RestaurantListItem>.from(
+        (map['restaurants'] as List<dynamic>).map<RestaurantListItem>(
+          (x) => RestaurantListItem.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
       count: map['count'] as int,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ListRestaurantResponse.fromJson(String source) => ListRestaurantResponse.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ListRestaurantResponse.fromJson(String source) =>
+      ListRestaurantResponse.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -64,19 +56,15 @@ class ListRestaurantResponse {
   bool operator ==(covariant ListRestaurantResponse other) {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
-  
-    return 
-      other.error == error &&
-      other.message == message &&
-      listEquals(other.restaurants, restaurants) &&
-      other.count == count;
+
+    return other.error == error &&
+        other.message == message &&
+        listEquals(other.restaurants, restaurants) &&
+        other.count == count;
   }
 
   @override
   int get hashCode {
-    return error.hashCode ^
-      message.hashCode ^
-      restaurants.hashCode ^
-      count.hashCode;
+    return error.hashCode ^ message.hashCode ^ restaurants.hashCode ^ count.hashCode;
   }
 }
