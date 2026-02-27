@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:onyx_restaurant/data/local_database_service.dart';
+import 'package:onyx_restaurant/provider/is_bookmark_provider.dart';
+import 'package:onyx_restaurant/provider/local_database_provider.dart';
 import 'package:onyx_restaurant/provider/navigation_provider.dart';
 import 'package:onyx_restaurant/provider/restaurant_provider.dart';
 import 'package:onyx_restaurant/provider/theme_provider.dart';
@@ -9,7 +12,11 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(create: (_) => ThemeProvider(), child: MyApp()),
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      ChangeNotifierProvider(create: (context) => LocalDatabaseProvider(context.read<LocalDatabaseService>())),
+      ChangeNotifierProvider(create: (_) => IsBookmarkProvider()),
+    ], child: const MyApp()),
   );
 }
 

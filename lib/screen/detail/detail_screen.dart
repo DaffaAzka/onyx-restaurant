@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/core/api_state.dart';
 import 'package:onyx_restaurant/provider/restaurant_provider.dart';
+import 'package:onyx_restaurant/widgets/bookmark_button_widget.dart';
 import 'package:onyx_restaurant/widgets/error_widget.dart';
 import 'package:onyx_restaurant/style/typography/onyx_text_styles.dart';
 import 'package:provider/provider.dart';
@@ -102,6 +103,8 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ],
                     ),
+                    const SizedBox(width: 8),
+                    BookmarkButtonWidget(restaurant: data.restaurant),
                   ],
                 ),
                 const SizedBox(height: 12),
