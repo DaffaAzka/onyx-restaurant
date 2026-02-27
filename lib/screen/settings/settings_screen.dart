@@ -12,6 +12,7 @@ class SettingsScreen extends StatelessWidget {
         context.watch<ThemeProvider>().getThemeMode == ThemeMode.dark;
 
     return Scaffold(
+      appBar: AppBar(title: Text("Settings Application"),),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,

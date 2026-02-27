@@ -19,6 +19,7 @@ class LocalDatabaseProvider extends ChangeNotifier {
   Future<void> addRestaurant(RestaurantListItem restaurant) async {
     try {
       await _service.insertRestaurant(restaurant);
+      _restaurants = await _service.getAllRestaurants();
       _message = "Added to favorites";
       notifyListeners();
     } catch (e) {
@@ -61,6 +62,8 @@ class LocalDatabaseProvider extends ChangeNotifier {
   Future<void> deleteRestaurant(String id) async {
     try {
       await _service.deleteRestaurant(id);
+      _restaurants = await _service.getAllRestaurants();
+      _restaurant = null;
       _message = "Deleted from favorites";
       notifyListeners();
     } catch (e) {
@@ -72,5 +75,9 @@ class LocalDatabaseProvider extends ChangeNotifier {
   bool checkIfFavorite(String id) {
     if (_restaurants == null) return false;
     return _restaurants!.any((restaurant) => restaurant.id == id);
+  }
+
+  bool isRestaurantBookmarked(String id) {
+    return _restaurant?.id == id;
   }
 }

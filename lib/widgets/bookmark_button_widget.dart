@@ -20,7 +20,8 @@ class _BookmarkButtonWidgetState extends State<BookmarkButtonWidget> {
     final localDatabaseProvider = context.read<LocalDatabaseProvider>();
     Future.microtask(() async {
       await localDatabaseProvider.loadRestaurantById(widget.restaurant.id);
-      isBookmarkProvider.isBookmarked = localDatabaseProvider.checkIfFavorite(widget.restaurant.id);
+      isBookmarkProvider.isBookmarked =
+          localDatabaseProvider.isRestaurantBookmarked(widget.restaurant.id);
     });
     super.initState();
   }

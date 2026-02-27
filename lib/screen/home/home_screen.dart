@@ -29,63 +29,66 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<RestaurantsProvider>().getState;
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsetsGeometry.all(12),
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: "Search restaurants...",
-              prefixIcon: const Icon(Icons.search),
-              suffixIcon: _searchController.text.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () {
-                        _searchController.clear();
-                        Provider.of<RestaurantsProvider>(
-                          context,
-                          listen: false,
-                        ).searchRestaurants('');
-                      },
-                    )
-                  : null,
-              filled: true,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
+    return Scaffold(
+      appBar: AppBar(title: const Text('Onyx Restaurant')),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsetsGeometry.all(12),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: "Search restaurants...",
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: _searchController.text.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          _searchController.clear();
+                          Provider.of<RestaurantsProvider>(
+                            context,
+                            listen: false,
+                          ).searchRestaurants('');
+                        },
+                      )
+                    : null,
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
               ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
-            ),
-            onEditingComplete: () {
-              Provider.of<RestaurantsProvider>(
-                context,
-                listen: false,
-              ).searchRestaurants(_searchController.text);
-            },
-          ),
-        ),
-        Expanded(
-          child: switch (state) {
-            ApiInitial() ||
-            ApiLoading() => const Center(child: CircularProgressIndicator()),
-
-            ApiSuccess(data: final data) => ListView.builder(
-              itemCount: data.count,
-              itemBuilder: (context, index) {
-                return RestaurantCard(item: data.restaurants[index]);
+              onEditingComplete: () {
+                Provider.of<RestaurantsProvider>(
+                  context,
+                  listen: false,
+                ).searchRestaurants(_searchController.text);
               },
             ),
+          ),
+          Expanded(
+            child: switch (state) {
+              ApiInitial() ||
+              ApiLoading() => const Center(child: CircularProgressIndicator()),
 
-            ApiError(message: final message) => CustomErrorWidget(
-              error: message,
-            ),
-          },
-        ),
-      ],
+              ApiSuccess(data: final data) => ListView.builder(
+                itemCount: data.count,
+                itemBuilder: (context, index) {
+                  return RestaurantCard(item: data.restaurants[index]);
+                },
+              ),
+
+              ApiError(message: final message) => CustomErrorWidget(
+                error: message,
+              ),
+            },
+          ),
+        ],
+      ),
     );
   }
 }

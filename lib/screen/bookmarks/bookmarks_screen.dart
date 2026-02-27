@@ -23,18 +23,18 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<LocalDatabaseProvider>().restaurants;
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsetsGeometry.all(12),
-          child: ListView.builder(
-            itemCount: state?.length ?? 0,
-            itemBuilder: (context, index) {
-              return RestaurantCard(item: state![index]);
-            },
-          ),
-        ),
-      ],
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Bookmarks')),
+      body: (state == null || state.isEmpty)
+          ? const Center(child: Text('Bookmarks is empty.'))
+          : ListView.builder(
+              padding: const EdgeInsets.all(12),
+              itemCount: state.length,
+              itemBuilder: (context, index) {
+                return RestaurantCard(item: state[index]);
+              },
+            ),
     );
   }
 }

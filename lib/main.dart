@@ -14,6 +14,7 @@ void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      Provider(create: (_) => LocalDatabaseService()),
       ChangeNotifierProvider(create: (context) => LocalDatabaseProvider(context.read<LocalDatabaseService>())),
       ChangeNotifierProvider(create: (_) => IsBookmarkProvider()),
     ], child: const MyApp()),
