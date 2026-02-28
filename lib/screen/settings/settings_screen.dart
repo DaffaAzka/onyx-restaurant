@@ -71,7 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               await LocalNotificationService().showNotification(
                 id: 1,
                 title: "Test",
-                body: "Notifikasi langsung berhasil!",
+                body: "Notifikasi dapat di jalankan",
               );
             },
             child: Text("Test Notifikasi"),

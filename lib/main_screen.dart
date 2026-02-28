@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onyx_restaurant/data/api/api_service.dart';
 import 'package:onyx_restaurant/provider/navigation_provider.dart';
 import 'package:onyx_restaurant/provider/restaurants_provider.dart';
 import 'package:onyx_restaurant/screen/home/home_screen.dart';
@@ -14,7 +15,7 @@ class MainScreen extends StatelessWidget {
     final nav = context.watch<NavigationProvider>();
     return Scaffold(
       body: switch (nav.getIndexNavigationBar) {
-        0 => ChangeNotifierProvider(create: (_) => RestaurantsProvider(), child: HomeScreen()),
+        0 => ChangeNotifierProvider(create: (_) => RestaurantsProvider(ApiService()), child: HomeScreen()),
         1 => SettingsScreen(),
         _ => BookmarksScreen(),
       },

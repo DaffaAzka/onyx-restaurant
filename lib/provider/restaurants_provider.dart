@@ -4,6 +4,10 @@ import 'package:onyx_restaurant/data/api/api_service.dart';
 import 'package:onyx_restaurant/data/models/responses/list_restaurant_response.dart';
 
 class RestaurantsProvider extends ChangeNotifier {
+  final ApiService _apiService;
+
+  RestaurantsProvider(this._apiService);
+
   ApiState<ListRestaurantResponse> _state = ApiInitial();
   ApiState<ListRestaurantResponse> get getState => _state;
 
@@ -12,7 +16,7 @@ class RestaurantsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await ApiService().getRestaurantListing();
+      final response = await _apiService.getRestaurantListing();
       _state = ApiSuccess(response);
     } catch (e) {
       _state = ApiError(e.toString());
@@ -26,7 +30,7 @@ class RestaurantsProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await ApiService().searchRestaurantListing(search);
+      final response = await _apiService.searchRestaurantListing(search);
       _state = ApiSuccess(
         ListRestaurantResponse(
           error: false,
