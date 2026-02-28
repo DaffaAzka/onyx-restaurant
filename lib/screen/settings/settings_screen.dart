@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onyx_restaurant/data/models/Setting.dart';
 import 'package:onyx_restaurant/provider/shared_preferences_provider.dart';
+import 'package:onyx_restaurant/services/local_notification_service.dart';
 import 'package:onyx_restaurant/style/typography/onyx_text_styles.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final sharedPreferencesProvider = context.watch<SharedPreferencesProvider>();
 
     final isDarkMode = sharedPreferencesProvider.setting?.isDarkMode ?? false;
-    final isNotificationsEnabled = sharedPreferencesProvider.setting?.isNotificationsEnabled ?? false;
+    final isDailyReminderEnabled = sharedPreferencesProvider.setting?.isDailyReminderEnabled ?? false;
 
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
@@ -43,7 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 value: isDarkMode,
                 onChanged: (value) {
                   context.read<SharedPreferencesProvider>().saveSettingValue(
-                    Setting(isDarkMode: value, isNotificationsEnabled: isNotificationsEnabled),
+                    Setting(isDarkMode: value, isDailyReminderEnabled: isDailyReminderEnabled),
                   );
                 },
               ),
@@ -53,22 +54,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Notifications", style: OnyxTextStyles.titleMedium),
+              Text("Daily Reminder", style: OnyxTextStyles.titleMedium),
               Switch(
-                value: isNotificationsEnabled,
+                value: isDailyReminderEnabled,
                 onChanged: (value) {
                   context.read<SharedPreferencesProvider>().saveSettingValue(
-                    Setting(isDarkMode: isDarkMode, isNotificationsEnabled: value),
+                    Setting(isDarkMode: isDarkMode, isDailyReminderEnabled: value),
                   );
                 },
               ),
             ],
           ),
-          if (sharedPreferencesProvider.message.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 24),
-              child: Text(sharedPreferencesProvider.message, style: OnyxTextStyles.titleMedium),
-            ),
+
+          ElevatedButton(
+            onPressed: () async {
+              await LocalNotificationService().showNotification(
+                id: 1,
+                title: "Test",
+                body: "Notifikasi langsung berhasil!",
+              );
+            },
+            child: Text("Test Notifikasi"),
+          ),
         ],
       ),
     );

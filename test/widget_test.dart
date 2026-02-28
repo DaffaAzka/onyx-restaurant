@@ -1,30 +1,74 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:onyx_restaurant/data/models/Setting.dart';
+import 'package:onyx_restaurant/provider/navigation_provider.dart';
+import 'package:onyx_restaurant/provider/shared_preferences_provider.dart';
+import 'package:onyx_restaurant/screen/settings/settings_screen.dart';
+import 'package:onyx_restaurant/services/workmanager_service.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:provider/provider.dart';
 
-import 'package:onyx_restaurant/main.dart';
+import 'widget_test.mocks.dart';
 
+@GenerateMocks([SharedPreferencesProvider, WorkmanagerService])
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  late MockSharedPreferencesProvider mockProvider;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  setUp(() {
+    mockProvider = MockSharedPreferencesProvider();
+    when(mockProvider.setting).thenReturn(
+      Setting(isDarkMode: false, isDailyReminderEnabled: false),
+    );
+    when(mockProvider.message).thenReturn('');
+    when(mockProvider.getSettingValue()).thenReturn(null);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+  testWidgets('SettingsScreen menampilkan label Dark Mode', (tester) async {
+    await tester.pumpWidget(
+      ChangeNotifierProvider<SharedPreferencesProvider>.value(
+        value: mockProvider,
+        child: const MaterialApp(home: SettingsScreen()),
+      ),
+    );
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Dark Mode'), findsOneWidget);
+  });
+
+  testWidgets('SettingsScreen menampilkan label Daily Reminder', (tester) async {
+    await tester.pumpWidget(
+      ChangeNotifierProvider<SharedPreferencesProvider>.value(
+        value: mockProvider,
+        child: const MaterialApp(home: SettingsScreen()),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('Daily Reminder'), findsOneWidget);
+  });
+
+  testWidgets('MainScreen menampilkan BottomNavigationBar dengan 3 item', (tester) async {
+    await tester.pumpWidget(
+      ChangeNotifierProvider(
+        create: (_) => NavigationProvider(),
+        child: MaterialApp(
+          home: Scaffold(
+            bottomNavigationBar: BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+                BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Bookmarks'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.byType(BottomNavigationBar), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Settings'), findsOneWidget);
+    expect(find.text('Bookmarks'), findsOneWidget);
   });
 }

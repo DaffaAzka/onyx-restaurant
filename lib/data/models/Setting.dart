@@ -1,6 +1,9 @@
 class Setting {
   final bool isDarkMode;
-  final bool isNotificationsEnabled;
+  final bool isDailyReminderEnabled;
 
-  Setting({required this.isDarkMode, required this.isNotificationsEnabled});
+  Setting({
+    required this.isDarkMode,
+    required this.isDailyReminderEnabled,
+  });
 }

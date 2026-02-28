@@ -6,16 +6,25 @@ import 'package:onyx_restaurant/provider/local_database_provider.dart';
 import 'package:onyx_restaurant/provider/navigation_provider.dart';
 import 'package:onyx_restaurant/provider/restaurant_provider.dart';
 import 'package:onyx_restaurant/provider/shared_preferences_provider.dart';
-import 'package:onyx_restaurant/provider/theme_provider.dart';
+import 'package:onyx_restaurant/services/local_notification_service.dart';
+import 'package:onyx_restaurant/services/workmanager_service.dart';
 import 'package:onyx_restaurant/main_screen.dart';
 import 'package:onyx_restaurant/screen/detail/detail_screen.dart';
 import 'package:onyx_restaurant/style/theme/onyx_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
+
+  final notificationService = LocalNotificationService();
+  await notificationService.init();
+  await notificationService.requestPermissions();
+
+  final workmanagerService = WorkmanagerService();
+  await workmanagerService.init();
+
   runApp(
     MultiProvider(
       providers: [
@@ -23,8 +32,13 @@ void main() async {
         ChangeNotifierProvider(create: (context) => LocalDatabaseProvider(context.read<LocalDatabaseService>())),
         ChangeNotifierProvider(create: (_) => IsBookmarkProvider()),
         Provider(create: (context) => SharedPreferencesService(preferencesService: prefs)),
+        Provider(create: (_) => notificationService),
+        Provider(create: (_) => workmanagerService),
         ChangeNotifierProvider(
-          create: (context) => SharedPreferencesProvider(context.read<SharedPreferencesService>()),
+          create: (context) => SharedPreferencesProvider(
+            context.read<SharedPreferencesService>(),
+            context.read<WorkmanagerService>(),
+          ),
         ),
       ],
       child: const MyApp(),
@@ -35,7 +49,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     bool isDark = context.watch<SharedPreferencesProvider>().setting?.isDarkMode ?? false;
@@ -58,3 +71,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
