@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:onyx_restaurant/data/models/Setting.dart';
+import 'package:onyx_restaurant/data/models/setting.dart';
 import 'package:onyx_restaurant/provider/navigation_provider.dart';
 import 'package:onyx_restaurant/provider/shared_preferences_provider.dart';
 import 'package:onyx_restaurant/screen/settings/settings_screen.dart';

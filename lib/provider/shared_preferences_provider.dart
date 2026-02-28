@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onyx_restaurant/data/models/Setting.dart';
+import 'package:onyx_restaurant/data/models/setting.dart';
 import 'package:onyx_restaurant/data/shared_preferences_service.dart';
 import 'package:onyx_restaurant/services/workmanager_service.dart';
 import 'package:workmanager/workmanager.dart';

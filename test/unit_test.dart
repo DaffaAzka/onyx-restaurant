@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:onyx_restaurant/data/models/Setting.dart';
+import 'package:onyx_restaurant/data/models/setting.dart';
 import 'package:onyx_restaurant/provider/navigation_provider.dart';
 
 void main() {

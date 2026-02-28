@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onyx_restaurant/data/models/Setting.dart';
+import 'package:onyx_restaurant/data/models/setting.dart';
 import 'package:onyx_restaurant/provider/shared_preferences_provider.dart';
 import 'package:onyx_restaurant/services/local_notification_service.dart';
 import 'package:onyx_restaurant/style/typography/onyx_text_styles.dart';

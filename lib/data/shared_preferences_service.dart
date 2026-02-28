@@ -1,4 +1,4 @@
-import 'package:onyx_restaurant/data/models/Setting.dart';
+import 'package:onyx_restaurant/data/models/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService {

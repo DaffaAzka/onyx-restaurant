@@ -1,4 +1,3 @@
-import 'package:onyx_restaurant/data/models/restaurant.dart';
 import 'package:onyx_restaurant/data/models/restaurant_list_item.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
